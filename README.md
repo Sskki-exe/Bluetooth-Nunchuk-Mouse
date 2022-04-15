@@ -2,7 +2,7 @@
 This repository is for a personal project of mine converting a Wii Nunchuk into a Bluetooth Mouse.
 
 ## Controls ##
-These are the controls I've configured. The accelerometer is not used. The C button is used for "Change Mode", cycling from 0 to 2. The joystick and Z button will change their behaviour depending on which mode the Nunchuk Mouse is in:
+These are the controls I've configured. The accelerometer is not used. The C button is used for "Change Mode", cycling from 0 to 2. The joystick and Z button will change their behaviour depending on which mode the Nunchuk Mouse is in:  
 0. Z button is left click. Joystick will move mouse around.
 1. Z button is right click. If Z button is not pressed, joystick will scroll (horizontally and vertically). If Z button is pressed, joystick will move mouse around
 2. Z button is middle click. Joystick will move mouse around
