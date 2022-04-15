@@ -1,6 +1,4 @@
 # ESP32-Nunchuk-Mouse #
-If anyone wants me to write out the README more properly, just put it in issues. Otherwise, I won't bother.
-
 This repository is for a personal project of mine converting a Wii Nunchuk into a Bluetooth Mouse.
 
 ## Controls ##
@@ -20,8 +18,8 @@ The inside of the Nunchuk Mouse contains:
 * 3.3V Buck Step Down Converter
 
 ### The Custom PCB ###
-![ESP32 Pinout](https://i0.wp.com/randomnerdtutorials.com/wp-content/uploads/2018/08/esp32-pinout-chip-ESP-WROOM-32.png?resize=1024%2C523&quality=100&strip=all&ssl=1)
-![Dev board pinout](https://i0.wp.com/randomnerdtutorials.com/wp-content/uploads/2018/08/ESP32-DOIT-DEVKIT-V1-Board-Pinout-36-GPIOs-updated.jpg?w=750&quality=100&strip=all&ssl=1)
+<img src="https://i0.wp.com/randomnerdtutorials.com/wp-content/uploads/2018/08/esp32-pinout-chip-ESP-WROOM-32.png?resize=1024%2C523&quality=100&strip=all&ssl=1" height="300">
+<img src="https://i0.wp.com/randomnerdtutorials.com/wp-content/uploads/2018/08/ESP32-DOIT-DEVKIT-V1-Board-Pinout-36-GPIOs-updated.jpg?w=750&quality=100&strip=all&ssl=1" height="300">
 The PCB has component holes connected to these pins of the ESP32 WROOM32:
 * 3.3V
 * GND
@@ -60,15 +58,45 @@ The power management board may need trimming:
 The wiring for the power management is pretty straight forward:
 WEMOS Battery Shield | Battery         | Buck Down Converter | ESP32
 -------------------- | --------------- | ------------------- | -----
-Battery Positive (+) | The red one duh |                     |
-Battery Negative (-) | The black one   |                     |
-5V (the GPIO one)    |                 | Input +             |
-GND (also GPIO one)  |                 | Input -             |
-                     |                 | Output +            | 3.3V
-                     |                 | Output -            | GND
+Battery Positive (+) | The red one duh | .                   | .
+Battery Negative (-) | The black one   | .                   | .
+5V (the GPIO one)    | .               | Input +             | .
+GND (also GPIO one)  | .               | Input -             | .
+.                    | .               | Output +            | 3.3V
+.                    | .               | Output -            | GND
 
 
 ## Code ##
-The Arduino code uses [W-vK's ESP32-BLE-Mouse Library](https://github.com/T-vK/ESP32-BLE-Mouse) and [Robert Eisele's Nunchuk Library](https://github.com/infusion/Fritzing/tree/master/Nunchuk). The ESP32-BLE-Mouse library can be installed as a zip file while the Nunchuk library is a .h file that needs to be included in the same folder as the .ino file.
+The Arduino code uses [W-vK's ESP32-BLE-Mouse Library](https://github.com/T-vK/ESP32-BLE-Mouse) and [Robert Eisele's Nunchuk Library](https://github.com/infusion/Fritzing/tree/master/Nunchuk). The ESP32-BLE-Mouse library can be installed as a zip file while the Nunchuk library is a .h file that needs to be included in the same folder as the .ino file. You will need to calibrate it and you can optionally customise the Bluetooth information.
 ### Calibration ###
-The code must be calibrated to your specific Nunchuk.
+The Nunchuk is not perfect and requires calibrations of deadzones and limits. Modify the code to your specific Nunchuk. Write a program that prints the Nunchuk joystick values to serial (you can ask me for help if you have no idea how to do that).
+#### Deadzones ####
+Leave your joystick in the "neutral position". The lowest and highest values for each axis are the low and high bounds of the deadzones.
+Variable Name | Full Name
+------------- | ----------------------------------
+xDzL          | x axis deadzone lower bound
+xDzH          | x axis deadzone higher/upper bound
+yDzL          | y axis deadzone lower bound
+yDzH          | y axis deadzone higher/upper bound
+#### Physical Limits of Joystick ####
+Push your joystick to each extreme (push it all the way left, right, up and down). The lowest and highest values for each axis are the low and high bounds of the x and y axes.
+Variable Name | Full Name
+------------- | -----------------------
+xLow          | minimum x value
+xHigh         | maximum x value
+yLow          | minimum y value
+yHigh         | maximum y value
+#### Moving & Scrolling Speeds ###
+This one is going to be trial and error. Change these values, upload to your Nunchuk Mouse, try it out and repeat until you're satisfied. I think these values should be fine for most people. As I implemented my code, the values must be integers so if you want finer adjustments, you'll have to edit the code.
+Variable Name | Full Name
+------------- | -----------------------
+mSped         | move speed
+sSped         | scroll speed
+### Changing the Bluetooth Information ###
+You can rename the name, manufacturer and batter level shown for the Nunchuk by changing the parameters in line 4 of code. 
+* Replace "Nunchuk Mouse" with the device name you want to show up on your computer/etc.
+* Replace "Sskki" with the manufacturuer name you want.
+* Replace 69 with whatever battery percentage you want to show up on your computer/etc. because battery monitoring was not wired up.
+```arduino
+BleMouse bleMouse("Nunchuk Mouse","Sskki",69);
+```
