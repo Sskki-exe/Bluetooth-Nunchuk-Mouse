@@ -30,6 +30,7 @@ The PCB has component holes connected to these pins of the ESP32 WROOM32:
 * I2C SDA (GPIO21)
 3.3V and GND are required for powering the ESP32. RX and TX are required for programming. The I2C pins are required for reading data from the Nunchuk.
 The PCB also have pullup resistors and buttons for Enable and Boot (GPIO0). Do not forget these if you choose to design your own PCB.
+
 #### Pullup Resistors ####
 For those who don't know what they are.
 * A pullup resistor is a resistor connecting a pin (such as Enable) to high (3.3V)
