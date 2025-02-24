@@ -22,12 +22,14 @@ The inside of the Nunchuk Mouse contains:
 <img src="https://i0.wp.com/randomnerdtutorials.com/wp-content/uploads/2018/08/esp32-pinout-chip-ESP-WROOM-32.png?resize=1024%2C523&quality=100&strip=all&ssl=1" height="300">
 <img src="https://i0.wp.com/randomnerdtutorials.com/wp-content/uploads/2018/08/ESP32-DOIT-DEVKIT-V1-Board-Pinout-36-GPIOs-updated.jpg?w=750&quality=100&strip=all&ssl=1" height="300">
 The PCB has component holes connected to these pins of the ESP32 WROOM32:
+
 * 3.3V
 * GND
 * RX (GPIO1)
 * TX (GPIO3)
 * I2C SCL (GPIO22)
 * I2C SDA (GPIO21)
+
 3.3V and GND are required for powering the ESP32. RX and TX are required for programming. The I2C pins are required for reading data from the Nunchuk.
 The PCB also have pullup resistors and buttons for Enable and Boot (GPIO0). Do not forget these if you choose to design your own PCB.
 
